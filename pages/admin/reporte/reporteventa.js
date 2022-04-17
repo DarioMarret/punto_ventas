@@ -20,7 +20,7 @@ import axios from 'axios'
 import TextField from "@material-ui/core/TextField"
 import { getDatosUsuario } from '../../../function/localstore/storeUsuario';
 import moment from 'moment';
-// import Modal from 'react-modal';
+import Modal from 'react-modal';
 import MUIDataTable from "mui-datatables";
 
 
@@ -195,7 +195,7 @@ function reporteventa(props) {
                     tableStyleName={removeStyling ? "" : "stripe-table"}
                     useMaterialUiPaging={true} /> */}
             </Card>
-            {/* <Modal
+            <Modal
                 isOpen={modalIsOpen}
                 // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
@@ -231,7 +231,6 @@ function reporteventa(props) {
                     }
                 </select>
             </Modal> 
-            */}
         </>
     );
 }

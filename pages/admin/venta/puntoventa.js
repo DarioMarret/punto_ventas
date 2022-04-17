@@ -3,12 +3,22 @@ import { Button, Card, Col, Container, Row, Table, Form, Modal as ModalSpinner }
 import { Modal, Spin } from 'antd'
 import Admin from "layouts/Admin.js";
 import "assets/css/PuntoVenta.css";
-import { DOCUMENTO } from "../../../function/util/global";
 import moment from "moment";
 import axios from "axios";
 import https from "https"
 import { functionPorcentaje, functionTotal, getDatosUsuario, getVerTienda, LimpiarAcumuladorById, LimpiarStoreDespuesDenviar, TiendaIten } from "../../../function/localstore/storeUsuario";
 
+
+const DOCUMENTO = [
+    {
+      "forma": "Facturacion",
+      "codigo": "01",
+    },
+    {
+      "forma": "Ticket",
+      "codigo": "00",
+    }
+  ]
 function puntoventa(props) {
 
     const [estable, setestable] = useState(null)
