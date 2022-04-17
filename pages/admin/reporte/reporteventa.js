@@ -21,8 +21,9 @@ import TextField from "@material-ui/core/TextField"
 import { TablePaging } from 'table-page-search';
 import { getDatosUsuario } from '../../../function/localstore/storeUsuario';
 import moment from 'moment';
-import Modal from 'react-modal';
-import { ESTADO, FORMAPAGO } from '../../../function/util/global';
+// import Modal from 'react-modal';
+import MUIDataTable from "mui-datatables";
+import { columns, ESTADO, FORMAPAGO } from '../../../function/util/global';
 
 
 const headerConfig = {
@@ -49,7 +50,9 @@ const customStyles = {
       transform: 'translate(-50%, -50%)',
     },
 };
-
+const options = {
+    filterType: 'checkbox',
+};
 
 function reporteventa(props) {
     const [loading, setloading] = useState(true);
@@ -107,7 +110,7 @@ function reporteventa(props) {
             <Header />
             {/* <div style={{padding:'60px'}}/> */}
             <Card className="shadow">
-                <div style={{ display: "flex" }}>
+                {/* <div style={{ display: "flex" }}>
                     <h4 style={{ marginLeft: 20 }}>
                         Reporte Venta 
                     </h4>
@@ -117,17 +120,23 @@ function reporteventa(props) {
                         vaule={filterText}
                         onChange={(e) => handleChange(e.target.value)}
                     />
-                </div>
-                <TablePaging
+                </div> */}
+                <MUIDataTable
+                    title={"Reporte Venta"}
+                    data={venta}
+                    columns={columns}
+                    options={options}
+                    />
+                {/* <TablePaging
                     loading={loading}
                     dataList={venta}
                     headerConfig={headerConfig}
                     filterText={filterText}
                     onRowClick={(row)=>openModal(row)}
                     tableStyleName={removeStyling ? "" : "stripe-table"}
-                    useMaterialUiPaging={true} />
+                    useMaterialUiPaging={true} /> */}
             </Card>
-            <Modal
+            {/* <Modal
                 isOpen={modalIsOpen}
                 // onAfterOpen={afterOpenModal}
                 onRequestClose={closeModal}
@@ -143,7 +152,7 @@ function reporteventa(props) {
                 Total: ${editar.total} <br></br>
                 Forma de Pago: {editar.forma_pago} <br></br>
                 Estado: {editar.estado}</p>
-                {/* <input /> */}
+
                 <select name="forma_pago" id="" className="form-control" onChange={(e) =>handleChangeEstado(e)}>
                     {
                         FORMAPAGO.map((iten,index)=>(
@@ -162,7 +171,8 @@ function reporteventa(props) {
                         ))
                     }
                 </select>
-            </Modal>
+            </Modal> 
+            */}
         </>
     );
 }

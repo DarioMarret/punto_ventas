@@ -58,3 +58,54 @@ export const DOCUMENTO = [
       "M":"ANULADO"
     }
   ]
+
+  export const columns = [
+    {
+     name: "secuencia",
+     label: "SECUENCIAL",
+     options: {
+      filter: true,
+      sort: true,
+     }
+    },
+    {
+     name: "forma_pago",
+     label: "FORMA DE PAGO",
+     options: {
+      filter: true,
+      sort: false,
+     }
+    },
+    {
+     name: "total",
+     label: "TOTAL",
+     options: {
+      filter: true,
+      sort: false,
+     }
+    },
+    {
+     name: "fecha_creacion",
+     label: "FECHA",
+     options: {
+      filter: true,
+      sort: false,
+     }
+    },
+    {
+      name: "empresa",
+      label: "EMPRESA",
+      options: {
+       filter: true,
+       sort: false,
+      }
+     },    
+     {
+      name: "estado",
+      label: "ESTADO",
+      options: {
+       filter: true,
+       sort: false,
+      }
+     },
+   ];
