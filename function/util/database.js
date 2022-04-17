@@ -1,5 +1,8 @@
 import mysql from 'mysql2'
 
+var Pool = require('pg-pool')
+
+/*
 const pool = mysql.createPool({
     host: "gestoresambientales.com.ec",
     user: "gestore4",
@@ -17,3 +20,14 @@ pool.getConnection(function(err) {
     console.log('connected as id ' + pool.id);
 });
 export { pool }
+*/
+const config = {
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  host: process.env.DB_HOST,
+  port: 5432,
+  database: process.env.DB_NAME,
+  ssl: false
+};
+const db = new Pool(config)
+export { db }

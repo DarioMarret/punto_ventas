@@ -1,7 +1,6 @@
-import sequelize from 'sequelize';
-import db from '../../../db/sequelizedb'
 import empty from 'is-empty';
 import bcrypt from 'bcrypt'
+import { db } from '../../../function/util/database';
 
 export default async (req, res) => {
 
@@ -26,9 +25,9 @@ const ListarVanta = async (req, res) => {
     try {
         const { empresa, fecha } = req.query
         let sql = `SELECT secuencia, fecha_creacion, empresa, sum(precio_venta * cantidad) AS total, estado, forma_pago FROM esq_reporte.reporte  WHERE empresa = '${empresa}' AND fecha_creacion = '${fecha}' GROUP BY secuencia, empresa, fecha_creacion, estado, forma_pago`;
-        db.query(sql, { type: sequelize.QueryTypes.SELECT }).then((response) => {
-            if (!empty(response[0])) {
-                res.status(200).json({ success: true, data: response })
+        db.query(sql).then((response) => {
+            if (!empty(response.rows[0])) {
+                res.status(200).json({ success: true, data: response.rows })
             } else {
                 res.status(200).json({ success: false })
             }
@@ -45,9 +44,9 @@ const ActualizarVentaSecuencial = async (req, res) => {
         const { secuencia, empresa } = editar
         if(!empty(forma_pago) && !empty(estado)){
             let sql = `UPDATE esq_reporte.reporte SET forma_pago = '${forma_pago}', estado = '${estado}' WHERE empresa = '${empresa}' AND secuencia = '${secuencia}'`;
-            db.query(sql, { type: sequelize.QueryTypes.SELECT }).then((response) => {
-                if (!empty(response[0])) {
-                    res.status(200).json({ success: true, data: response })
+            db.query(sql).then((response) => {
+                if (!empty(response.rows[0])) {
+                    res.status(200).json({ success: true, data: response.rows })
                 } else {
                     res.status(200).json({ success: false })
                 }
@@ -56,9 +55,9 @@ const ActualizarVentaSecuencial = async (req, res) => {
             }) 
         }else if(!empty(estado)){
             let sql = `UPDATE esq_reporte.reporte SET estado = '${estado}'  WHERE empresa = '${empresa}' AND secuencia = '${secuencia}'`;
-            db.query(sql, { type: sequelize.QueryTypes.SELECT }).then((response) => {
-                if (!empty(response[0])) {
-                    res.status(200).json({ success: true, data: response })
+            db.query(sql).then((response) => {
+                if (!empty(response.rows[0])) {
+                    res.status(200).json({ success: true, data: response.rows })
                 } else {
                     res.status(200).json({ success: false })
                 }
@@ -67,9 +66,9 @@ const ActualizarVentaSecuencial = async (req, res) => {
             })
         }else if(!empty(forma_pago)){
             let sql = `UPDATE esq_reporte.reporte SET forma_pago = '${forma_pago}'  WHERE empresa = '${empresa}' AND secuencia = '${secuencia}'`;
-            db.query(sql, { type: sequelize.QueryTypes.SELECT }).then((response) => {
-                if (!empty(response[0])) {
-                    res.status(200).json({ success: true, data: response })
+            db.query(sql).then((response) => {
+                if (!empty(response.rows[0])) {
+                    res.status(200).json({ success: true, data: response.rows })
                 } else {
                     res.status(200).json({ success: false })
                 }
@@ -83,7 +82,6 @@ const ActualizarVentaSecuencial = async (req, res) => {
 }
 async function CrearVenta(req, res) {
     const { empresa, tienda, secuencial, fecha, forma_pago, estado } = req.body;
-
     var count = 0;
     for (var index = 0; index < tienda.length; index++) {
         let producto = tienda[index].producto;
@@ -91,8 +89,8 @@ async function CrearVenta(req, res) {
         let cantidad = tienda[index].cantidad;
         let sql = `INSERT INTO esq_reporte.reporte (secuencia, producto, precio_venta, cantidad, fecha_creacion, empresa, forma_pago, estado ) 
         VALUES ('${secuencial}','${producto}','${precio_venta}','${cantidad}','${fecha}','${empresa}','${forma_pago}','${estado}')`;
-        db.query(sql, { type: sequelize.QueryTypes.SELECT }).then((response) => {
-            if (!empty(response)) {
+        db.query(sql).then((response) => {
+            if (!empty(response.rows)) {
                count += 1
             } else {
                 res.status(200).json({ success: false })

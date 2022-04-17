@@ -1,5 +1,4 @@
-import sequelize from 'sequelize';
-import db from '../../../db/sequelizedb'
+import { db } from '../../../function/util/database';
 import empty from 'is-empty';
 import bcrypt from 'bcrypt'
 
@@ -27,12 +26,12 @@ async function ListarProductoConsiDencia(req, res){
         const { empresa, busqueda } = req.body;
         let coinsi = busqueda.toLowerCase()
         let sql = `SELECT id, id_categoria, producto, precio_venta, porcentaje_iva, estado FROM esq_productos.producto WHERE (producto LIKE '%${coinsi}%') AND empresa = '${empresa}' AND estado = 'A' LIMIT 10`;
-        db.query(sql,{type: sequelize.QueryTypes.SELECT}).then((response)=>{
-            console.log(response);
+        db.query(sql).then((response)=>{
+            console.log(response.rows);
             if(!empty(response)){
                 res.json({
                     success: true,
-                    data: response,
+                    data: response.rows,
                     msg:'ListarProductoConsiDencia',
                 })
             }else{

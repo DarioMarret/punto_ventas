@@ -76,7 +76,7 @@ export default function MyApp({ Component, pageProps }) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Plantilla</title>
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
+        {/* <script src="https://maps.googleapis.com/maps/api/js"></script> */}
       </Head>
       {
         auth != null ? 
