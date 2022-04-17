@@ -1,6 +1,6 @@
 import { DescryptCualquierDato, EncryptCualquierDato } from "../util/ecrypt";
-import { usuario_local } from "../util/global";
-
+const usuario_token = "token_usuario:"
+const usuario_local = "usuario:"
 
 export function setDatosUsuario(data) {
     try {

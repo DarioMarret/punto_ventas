@@ -3,6 +3,8 @@ import db from '../../../db/sequelizedb'
 import empty from 'is-empty';
 import bcrypt from 'bcrypt'
 
+const usuario_token = "token_usuario:"
+const usuario_local = "usuario:"
 export default async (req, res)=>{
     try {
         const { usuario, contracena } = req.body;
