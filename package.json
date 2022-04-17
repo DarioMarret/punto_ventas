@@ -20,7 +20,8 @@
     "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/nextjs-argon-dashboard.scss assets/css/nextjs-argon-dashboard.min.css --output-style compressed",
     "map:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js assets/scss/nextjs-argon-dashboard.scss assets/css/nextjs-argon-dashboard.css --source-map true",
     "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss",
-    "dev": "next dev"
+    "dev": "next dev",
+    "eject": "node server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -41,6 +42,7 @@
     "chart.js": "2.9.4",
     "classnames": "2.2.6",
     "dotenv": "^16.0.0",
+    "express": "^4.17.3",
     "https": "^1.0.0",
     "init": "^0.1.2",
     "is-empty": "^1.2.0",

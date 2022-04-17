@@ -18,28 +18,87 @@ import Admin from "layouts/Admin.js";
 import Header from "components/Headers/Header.js";
 import axios from 'axios'
 import TextField from "@material-ui/core/TextField"
-import { TablePaging } from 'table-page-search';
 import { getDatosUsuario } from '../../../function/localstore/storeUsuario';
 import moment from 'moment';
 // import Modal from 'react-modal';
 import MUIDataTable from "mui-datatables";
-import { columns, ESTADO, FORMAPAGO } from '../../../function/util/global';
 
 
-const headerConfig = {
-    key: "id",
-    itemsPerPage: 8,
-    defaultSort: "lastName",
-    sortDescending: true,
-    columns: [
-        { fieldForSort: "secuencia", columnLabel: "Secuencia", headerCellStyle: { width: 80 }, disableCellClick: true },
-        { fieldForSort: "forma_pago", columnLabel: "Forma Pago", disableCellClick: false },
-        { fieldForSort: "total", columnLabel: "Total", disableCellClick: true },
-        { fieldForSort: "fecha_creacion", columnLabel: "Fecha", disableCellClick: true },
-        { fieldForSort: "empresa", columnLabel: "Empresa", disableCellClick: true },
-        { fieldForSort: "estado", columnLabel: "Estado" },
-    ]
-};
+const FORMAPAGO = [
+    {
+      "E": "EFECTIVO",
+      "M": "EFECTIVO"
+    },
+    {
+      "E": "TARJETA",
+      "M": "TARJETA"
+    },
+    {
+      "E": "TRANSFERENCIA",
+      "M": "TRANSFERENCIA"
+    }
+]
+
+const ESTADO = [
+    {
+      "E": "ACTIVO",
+      "M": "ACTIVO"
+    },
+    {
+      "E": "ANULADO",
+      "M": "ANULADO"
+    }
+]
+const columns = [
+    {
+      name: "secuencia",
+      label: "SECUENCIAL",
+      options: {
+        filter: true,
+        sort: true,
+      }
+    },
+    {
+      name: "forma_pago",
+      label: "FORMA DE PAGO",
+      options: {
+        filter: true,
+        sort: false,
+      }
+    },
+    {
+      name: "total",
+      label: "TOTAL",
+      options: {
+        filter: true,
+        sort: false,
+      }
+    },
+    {
+      name: "fecha_creacion",
+      label: "FECHA",
+      options: {
+        filter: true,
+        sort: false,
+      }
+    },
+    {
+      name: "empresa",
+      label: "EMPRESA",
+      options: {
+        filter: true,
+        sort: false,
+      }
+    },
+    {
+      name: "estado",
+      label: "ESTADO",
+      options: {
+        filter: true,
+        sort: false,
+      }
+    },
+]
 const customStyles = {
     content: {
       top: '50%',
